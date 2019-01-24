@@ -13,26 +13,21 @@ public class TennisMatch {
     }
 
     void updateWithPointWonBy(Player player) {
+
         if (isPlayer1(player)) {
-            if(player1.getPoint().equals("45")){
-                updateGameBy(player1);
-                //resetPoint();
-            }
             addPoint(player1);
 
         } else {
             addPoint(player2);
         }
 
-        if (
-                player1.getPoint().equals("45") && player2.getPoint().equals("45") ||
-                player1.getPoint().equals("45A") && player2.getPoint().equals("45A")
-        ) {
-            player1.setPoint("E");
-            player2.setPoint("E");
+
+
+
+
+        if(player1.getPoint().equals("W")){
+            updateGameBy(player1);
         }
-
-
     }
 
     String pointForPlayer(Player player) {
@@ -72,16 +67,27 @@ public class TennisMatch {
                 player.setPoint("30");
                 break;
             case "30":
-                player.setPoint("45");
+                player.setPoint("40");
                 break;
-            case "E":
-                player.setPoint("45A");
+            case "40":
+                if(player1.getPoint().equals("40") && player2.getPoint().equals("40")){
+                    player.setPoint("40A");
+                } else if(player1.getPoint().equals("40A") || player2.getPoint().equals("40A")){
+                    player1.setPoint("40");
+                    player2.setPoint("40");
+                } else {
+                    player.setPoint("W");
+                }
+                break;
+            case "40A":
+                player.setPoint("W");
                 break;
         }
     }
 
     private void updateGameBy(Player player){
-       // player.setGame(player.getGame()++);
+        int playerGame = player.getGame() + 1;
+        player.setGame(playerGame);
     }
 
 }
