@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 public class TennisMatchTest {
 
     @Test
-    public void testPlayer1WinGame() {
+    public void testPlayer1Point() {
         Player player1 = new Player("Jean");
         Player player2 = new Player("Philips");
         TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
@@ -18,11 +18,11 @@ public class TennisMatchTest {
         match.updateWithPointWonBy(player1);
         assertEquals(match.pointForPlayer(player1), "40");
         match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "W");
+        assertEquals(match.pointForPlayer(player1), "0");
     }
 
     @Test
-    public void testPlayer2WinGame() {
+    public void testPlayer2Point() {
         Player player1 = new Player("Jean");
         Player player2 = new Player("Philips");
         TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
@@ -34,12 +34,11 @@ public class TennisMatchTest {
         match.updateWithPointWonBy(player2);
         assertEquals(match.pointForPlayer(player2), "40");
         match.updateWithPointWonBy(player2);
-        assertEquals(match.pointForPlayer(player2), "W");
+        assertEquals(match.pointForPlayer(player2), "0");
     }
 
-
     @Test
-    public void testMatchGame(){
+    public void testPlayer1WinGame(){
         Player player1 = new Player("Jean");
         Player player2 = new Player("Philips");
         TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
@@ -58,15 +57,42 @@ public class TennisMatchTest {
         assertEquals(match.pointForPlayer(player1), "40");
         assertEquals(match.pointForPlayer(player2), "15");
         match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "W");
-        assertEquals(match.pointForPlayer(player2), "15");
+        assertEquals(match.pointForPlayer(player1), "0");
+        assertEquals(match.pointForPlayer(player2), "0");
         assertEquals(player1.getGame(), 1);
         assertEquals(player2.getGame(), 0);
 
     }
 
     @Test
-    public void testMatchEqualsAndWin(){
+    public void testPlayer2WinGame(){
+        Player player1 = new Player("Jean");
+        Player player2 = new Player("Philips");
+        TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
+        assertEquals(match.pointForPlayer(player1), "0");
+        assertEquals(match.pointForPlayer(player2), "0");
+        match.updateWithPointWonBy(player2);
+        assertEquals(match.pointForPlayer(player1), "0");
+        assertEquals(match.pointForPlayer(player2), "15");
+        match.updateWithPointWonBy(player2);
+        assertEquals(match.pointForPlayer(player1), "0");
+        assertEquals(match.pointForPlayer(player2), "30");
+        match.updateWithPointWonBy(player2);
+        assertEquals(match.pointForPlayer(player1), "0");
+        assertEquals(match.pointForPlayer(player2), "40");
+        match.updateWithPointWonBy(player1);
+        assertEquals(match.pointForPlayer(player1), "15");
+        assertEquals(match.pointForPlayer(player2), "40");
+        match.updateWithPointWonBy(player2);
+        assertEquals(match.pointForPlayer(player1), "0");
+        assertEquals(match.pointForPlayer(player2), "0");
+        assertEquals(player1.getGame(), 0);
+        assertEquals(player2.getGame(), 1);
+
+    }
+
+    @Test
+    public void testMatchEqualsAndPlayer2WinGame(){
         Player player1 = new Player("Jean");
         Player player2 = new Player("Philips");
         TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
@@ -100,8 +126,8 @@ public class TennisMatchTest {
         assertEquals(match.pointForPlayer(player1), "40");
         assertEquals(match.pointForPlayer(player2), "40A");
         match.updateWithPointWonBy(player2);
-        assertEquals(match.pointForPlayer(player1), "40");
-        assertEquals(match.pointForPlayer(player2), "W");
+        assertEquals(match.pointForPlayer(player1), "0");
+        assertEquals(match.pointForPlayer(player2), "0");
         assertEquals(player1.getGame(), 0);
         assertEquals(player2.getGame(), 1);
 
@@ -201,157 +227,73 @@ public class TennisMatchTest {
     }
 
     @Test
-    public void testSetMatch(){
+    public void testPlayer1WinSet(){
         Player player1 = new Player("Jean");
         Player player2 = new Player("Philips");
         TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
 
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
+        playerWinGame(match,player1);
+        assertEquals(player1.getGame(), 1);
+        assertEquals(player2.getGame(), 0);
 
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
+        playerWinGame(match,player1);
+        assertEquals(player1.getGame(), 2);
+        assertEquals(player2.getGame(), 0);
 
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
+        playerWinGame(match,player1);
+        assertEquals(player1.getGame(), 3);
+        assertEquals(player2.getGame(), 0);
 
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
+        playerWinGame(match,player1);
+        assertEquals(player1.getGame(), 4);
+        assertEquals(player2.getGame(), 0);
 
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
+        playerWinGame(match,player1);
+        assertEquals(player1.getGame(), 5);
+        assertEquals(player2.getGame(), 0);
 
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
+        playerWinGame(match,player2);
+        assertEquals(player1.getGame(), 5);
+        assertEquals(player2.getGame(), 1);
 
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
+        playerWinGame(match,player2);
+        assertEquals(player1.getGame(), 5);
+        assertEquals(player2.getGame(), 2);
 
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
+        playerWinGame(match,player2);
+        assertEquals(player1.getGame(), 5);
+        assertEquals(player2.getGame(), 3);
 
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
+        playerWinGame(match,player2);
+        assertEquals(player1.getGame(), 5);
+        assertEquals(player2.getGame(), 4);
 
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-
+        playerWinGame(match,player1);
 
         assertEquals(player1.getSet(), 1);
-
+        assertEquals(player2.getSet(), 0);
 
 
     }
 
     @Test
-    public void testMatchTieBreak(){
-        Player player1 = new Player("Jean");
-        Player player2 = new Player("Philips");
-        TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
-
-        for(int y = 0 ; y < 5; y++) {
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-        }
-
-
-        for(int y = 0 ; y < 5; y++) {
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-        }
-
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-
-        match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "1");
-        assertEquals(match.pointForPlayer(player2), "0");
-        match.updateWithPointWonBy(player2);
-        assertEquals(match.pointForPlayer(player1), "1");
-        assertEquals(match.pointForPlayer(player2), "1");
-        match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "2");
-        assertEquals(match.pointForPlayer(player2), "1");
-        match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "3");
-        assertEquals(match.pointForPlayer(player2), "1");
-        match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "4");
-        assertEquals(match.pointForPlayer(player2), "1");
-        match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "5");
-        assertEquals(match.pointForPlayer(player2), "1");
-        match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "6");
-        assertEquals(match.pointForPlayer(player2), "1");
-        match.updateWithPointWonBy(player1);
-        assertEquals(match.pointForPlayer(player1), "0");
-        assertEquals(match.pointForPlayer(player2), "0");
-
-        assertEquals(player1.getSet(), 1);
-
-    }
-
-    @Test
-    public void testPlayer2WinMatchNoTieBreak(){
+    public void testPlayer1WinMatchNoTieBreak(){
 
         Player player1 = new Player("Jean");
         Player player2 = new Player("Philips");
         TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, false);
 
+        playerWinSet(match,player1);
+        assertEquals(player1.getSet(),1);
+        assertEquals(player2.getSet(),0);
 
-        for(int y = 0 ; y < 6; y++) {
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-        }
+        playerWinSet(match,player2);
+        assertEquals(player1.getSet(),1);
+        assertEquals(player2.getSet(),1);
 
-
-        for(int y = 0 ; y < 6; y++) {
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-        }
-
-        for(int y = 0 ; y < 6; y++) {
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-        }
+        playerWinSet(match,player1);
+        assertEquals(player1.getSet(),2);
+        assertEquals(player2.getSet(),1);
 
         assertTrue(match.isFinished());
 
@@ -363,48 +305,17 @@ public class TennisMatchTest {
         Player player2 = new Player("Philips");
         TennisMatch match = new TennisMatch(player1, player2, MatchType.BEST_OF_THREE, true);
 
+        playerWinSet(match,player1);
 
-        for(int y = 0 ; y < 6; y++) {
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-        }
+        playerWinSet(match,player2);
 
+        playerWinYGames(match,player1,5);
 
-        for(int y = 0 ; y < 6; y++) {
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-        }
+        playerWinYGames(match,player2,5);
 
+        playerWinGame(match, player1);
 
-        for(int y = 0 ; y < 5; y++) {
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-            match.updateWithPointWonBy(player1);
-        }
-
-
-        for(int y = 0 ; y < 5; y++) {
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-            match.updateWithPointWonBy(player2);
-        }
-
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-        match.updateWithPointWonBy(player1);
-
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-        match.updateWithPointWonBy(player2);
-
+        playerWinGame(match, player2);
 
         match.updateWithPointWonBy(player1);
         assertEquals(match.pointForPlayer(player1), "1");
@@ -434,6 +345,26 @@ public class TennisMatchTest {
         assertTrue(match.isFinished());
     }
 
+
+    // Private function
+    private void playerWinGame(TennisMatch match,Player player){
+        match.updateWithPointWonBy(player);
+        match.updateWithPointWonBy(player);
+        match.updateWithPointWonBy(player);
+        match.updateWithPointWonBy(player);
+    }
+
+    private void playerWinSet(TennisMatch match, Player player){
+        for(int x = 0 ; x < 6; x++) {
+            playerWinGame(match,player);
+        }
+    }
+
+    private void playerWinYGames(TennisMatch match, Player player, int y){
+        for(int x = 0 ; x < y; x++) {
+            playerWinGame(match,player);
+        }
+    }
 
 }
 

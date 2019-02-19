@@ -58,8 +58,6 @@ public class TennisMatch {
                   if(tieBreakInLastSet){
                       isTieBreak = true;
                   }
-                } else {
-                    isTieBreak = true;
                 }
             } else if((player1.getGame() - player2.getGame()) >= 2 ){
                 player1.setSet(player1.getSet()+1);
@@ -73,10 +71,6 @@ public class TennisMatch {
 
     String pointForPlayer(Player player) {
         return player.getPoint();
-    }
-
-    String pointsForPlayer(Player player) {
-        return "";
     }
 
     int currentSetNumber() {
@@ -135,8 +129,6 @@ public class TennisMatch {
                 case "6":
                     player.setPoint("7");
                     break;
-
-
             }
 
         } else {
@@ -165,7 +157,6 @@ public class TennisMatch {
                     break;
             }
         }
-
     }
 
     private void updateGameBy(Player player){
