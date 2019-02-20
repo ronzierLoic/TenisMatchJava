@@ -1,4 +1,4 @@
-public class TennisMatch {
+class TennisMatch {
 
     private Player player1;
     private Player player2;
@@ -6,7 +6,7 @@ public class TennisMatch {
     private boolean tieBreakInLastSet;
     private boolean isTieBreak = false;
 
-    public TennisMatch(Player player1, Player player2, MatchType matchType, boolean tieBreakInLastSet) {
+    TennisMatch(Player player1, Player player2, MatchType matchType, boolean tieBreakInLastSet) {
         this.player1 = player1;
         this.player2 = player2;
         this.matchType = matchType;
@@ -54,10 +54,12 @@ public class TennisMatch {
                }
             }
             if(player1.getGame() == 6 && player2.getGame() == 6){
-                if((player1.getSet() + player2.getSet()) == matchType.maxNumberOfSets()-1){
+                if(currentSetNumber() == matchType.maxNumberOfSets()-1){
                   if(tieBreakInLastSet){
                       isTieBreak = true;
                   }
+                } else {
+                    isTieBreak = true;
                 }
             } else if((player1.getGame() - player2.getGame()) >= 2 ){
                 player1.setSet(player1.getSet()+1);
@@ -73,8 +75,8 @@ public class TennisMatch {
         return player.getPoint();
     }
 
-    int currentSetNumber() {
-        return 0;
+    private int currentSetNumber() {
+        return player1.getSet() + player2.getSet();
     }
 
     int gamesInCurrentSetForPlayer(Player player) {
