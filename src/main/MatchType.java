@@ -8,7 +8,7 @@ public enum MatchType {
         this.numberOfSetsToWin = numberOfSetsToWin;
     }
 
-    public int numberOfSetsToWin() {
+    public int getNumberOfSetsToWin() {
         return numberOfSetsToWin;
     }
 
